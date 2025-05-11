@@ -20,6 +20,7 @@ app.use(cors({
  
 }));
 
+app.options('*', cors());
 
 app.use((req, res, next) => {
   console.log('CORS Headers:', res.getHeaders());
