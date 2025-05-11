@@ -17,7 +17,7 @@ const app = express();
 app.use(cors({
   origin: 'https://mern-ecom-frontend-indol.vercel.app', // Set to your frontend URL
   credentials: true, // Allow credentials (cookies)
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Add necessary methods
+ 
 }));
 
 
