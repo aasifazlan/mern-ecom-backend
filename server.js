@@ -15,9 +15,16 @@ dotenv.config()
 const app = express();
 
 app.use(cors({
-  origin: 'https://mern-ecom-frontend-indol.vercel.app', 
-  credentials: true
+  origin: 'https://mern-ecom-frontend-indol.vercel.app', // Set to your frontend URL
+  credentials: true, // Allow credentials (cookies)
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Add necessary methods
 }));
+
+
+app.use((req, res, next) => {
+  console.log('CORS Headers:', res.getHeaders());
+  next();
+});
 
 
 app.use(express.json({limit: "10mb"})); // this allow you to parse the body of the request
