@@ -15,10 +15,10 @@ dotenv.config()
 const app = express();
 
 app.use(cors({
-    origin: 'http://localhost:5173', // Allow requests from your frontend
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true
-  }));
+  origin: 'https://mern-ecom-frontend-indol.vercel.app', 
+  credentials: true
+}));
+
 
 app.use(express.json({limit: "10mb"})); // this allow you to parse the body of the request
 app.use(cookieParser()); // 
