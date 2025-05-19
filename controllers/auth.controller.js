@@ -51,7 +51,6 @@ export const signup= async (req, res) => {
      await storeRefreshToken(user._id, refreshToken);
      setCookies(res, accessToken, refreshToken);
 
-    // res.status(201).json({user, message: 'user created successfully' })// this will show user's evry information
     res.status(201).json({user: {
         _id: user._id,
         email: user.email,

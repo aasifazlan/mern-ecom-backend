@@ -1,7 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv'
 import cors from 'cors';
-import mongoose from 'mongoose';
 import authRoutes from './routes/auth.route.js'
 import productRoutes from './routes/product.route.js'
 import cartRoutes from './routes/cart.route.js'
@@ -14,13 +13,28 @@ dotenv.config()
 
 const app = express();
 
+const allowedOrigins = [
+  'https://mern-ecom-frontend-indol.vercel.app',
+  'http://localhost:5173'
+];
+
 app.use(cors({
-  origin: 'https://mern-ecom-frontend-indol.vercel.app', // Set to your frontend URL
-  credentials: true, // Allow credentials (cookies)
- 
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
 }));
 
-app.options('*', cors());
+app.use((req, res, next) => {
+  console.log('Incoming request origin:', req.headers.origin);
+  next();
+});
+
+ 
 
 app.use((req, res, next) => {
   console.log('CORS Headers:', res.getHeaders());
