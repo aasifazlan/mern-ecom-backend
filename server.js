@@ -29,6 +29,14 @@ app.use(cors({
   credentials: true
 }));
 
+app.get('/ping', (req, res) => {
+  res.json({
+    message: 'pong',
+    origin: req.headers.origin
+  });
+});
+
+
 app.use((req, res, next) => {
   console.log('Incoming request origin:', req.headers.origin);
   next();
