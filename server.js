@@ -13,36 +13,13 @@ dotenv.config()
 
 const app = express();
 
-const allowedOrigins = [
-  'https://mern-ecom-frontend-indol.vercel.app',
-  'http://localhost:5173'
-];
-
 app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true
+  origin: 'https://mern-ecom-frontend-indol.vercel.app',  
+  credentials: true,  
+ 
 }));
 
-app.get('/ping', (req, res) => {
-  res.json({
-    message: 'pong',
-    origin: req.headers.origin
-  });
-});
-
-
-app.use((req, res, next) => {
-  console.log('Incoming request origin:', req.headers.origin);
-  next();
-});
-
- 
+app.options('*', cors());
 
 app.use((req, res, next) => {
   console.log('CORS Headers:', res.getHeaders());
