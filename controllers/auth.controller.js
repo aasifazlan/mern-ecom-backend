@@ -30,13 +30,13 @@ const setCookies=(res, accessToken, refreshToken)=>{
         httpOnly: true, // prevents XSS attacks , cross site scripting attacks
         secure: process.env.NODE_ENV === 'production',
         maxAge: 1000*60*15, // 15 minutes
-        sameSite: 'strict'// prevents CSRF attacks, cross-site request forgery
+        sameSite: 'None'// prevents CSRF attacks, cross-site request forgery
             });
     res.cookie('refreshToken', refreshToken, {
         httpOnly: true, // prevents XSS attacks , cross site scripting attacks
         secure: process.env.NODE_ENV === 'production',
         maxAge:  7*24*60*60*1000, // 7 days
-        sameSite: 'strict' // prevents CSRF attacks, cross-site request forgery
+        sameSite: 'None' //strict prevents CSRF attacks, cross-site request forgery 
             });
         }
 
@@ -126,7 +126,7 @@ export const refreshToken = async (req, res) => {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             maxAge: 1000*60*15,
-            sameSite: 'strict'
+            sameSite: 'None'
         })
         res.json({message: 'Token refreshed successfully'})
     } catch (error) {
